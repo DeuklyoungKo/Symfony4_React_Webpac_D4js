@@ -68,14 +68,33 @@ Encore
 // .autoProvidejQuery()
 
 // uncomment if you use API Platform Admin (composer req api-admin)
-// .enableReactPreset()
+  .enableReactPreset()
 // .addEntry('admin', './assets/js/admin.js')
+
+
 
 
 // will be applied for `encore dev --watch` and `encore dev-server` commands
   .configureWatchOptions(watchOptions => {
     watchOptions.poll = 250; // check for changes every 250 milliseconds
-  });
+  })
+
+/*  .copyFiles({
+    from: './assets/data/',
+  })*/
+
+
+  .addLoader({
+    test: /\.csv$/,
+    loader: 'csv-loader',
+    options: {
+      dynamicTyping: true,
+      header: true,
+      skipEmptyLines: true
+    }
+  })
+
+;
 
 
 module.exports = Encore.getWebpackConfig();

@@ -1,5 +1,6 @@
 {
     "devDependencies": {
+        "@babel/preset-react": "^7.0.0",
         "@symfony/webpack-encore": "^0.27.0",
         "core-js": "^3.0.0",
         "eslint": "^5.3.0",
@@ -7,8 +8,6 @@
         "eslint-plugin-import": "^2.18.0",
         "eslint-plugin-jsx-a11y": "^6.2.3",
         "eslint-plugin-react": "^7.14.2",
-        "react": "^16.8.6",
-        "react-dom": "^16.8.6",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
@@ -18,5 +17,13 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
+    },
+    "dependencies": {
+        "c3": "^0.7.1",
+        "chart.js": "^2.8.0",
+        "d3": "^5.9.7",
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6",
+        "react-vis": "^1.11.7"
     }
 }
