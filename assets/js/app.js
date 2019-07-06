@@ -1,26 +1,26 @@
-/*
-/!*
- * Welcome to your app's main JavaScript file!
- *
- * We recommend including the built version of this JavaScript file
- * (and its CSS file) in your base layout (base.html.twig).
- *!/
-
-// any CSS you require will output into a single css file (app.css in this case)
-require('../css/app.css');
-
-// Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-// const $ = require('jquery');
-
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
-
-*/
 import React from 'react';
 import { render } from 'react-dom';
-import '../css/app.css';
+import Main from './Main';
+
+
+let fatchLink = "";
+
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+  // dev code
+  console.log("development");
+  fatchLink = "http://reactjs.test.com:8080/build/manifest.json";
+} else {
+  // production code
+  console.log("production");
+  fatchLink = "http://reactjs.test.com/build/manifest.json";
+}
+
+
 
 
 render(
-  "test gogo",
+  <Main
+      fatchLink={fatchLink}
+  />,
   document.getElementById('app')
 );
