@@ -17,11 +17,10 @@ console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
 */
 import React from 'react';
 import { render } from 'react-dom';
-import Main from './Main';
 import '../css/app.css';
 
 
 render(
-  <Main/>,
+  "test gogo",
   document.getElementById('app')
 );

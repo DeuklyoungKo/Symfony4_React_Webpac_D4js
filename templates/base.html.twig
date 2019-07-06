@@ -1,18 +1,93 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
+
+            <!-- Custom fonts for this template-->
+            {#<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">#}
+            {#<link href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">#}
+            {{ encore_entry_link_tags('fontawesome') }}
+
+            <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,60
+            0,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+            <!-- Custom styles for this template-->
+            {#<link href="css/sb-admin-2.min.css" rel="stylesheet">#}
+            {{ encore_entry_link_tags('sb-admin-2.min.css') }}
+
             {# 'app' must match the first argument to addEntry() in webpack.config.js #}
             {{ encore_entry_link_tags('app') }}
             <!-- Renders a link tag (if your module requires any CSS)
                  <link rel="stylesheet" href="/build/app.css"> -->
         {% endblock %}
     </head>
-    <body>
+<body id="page-top">
         {% block body %}{% endblock %}
+
+
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         {% block javascripts %}
+
+            <!-- Bootstrap core JavaScript-->
+            {#<script src="vendor/jquery/jquery.min.js"></script>#}
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            {#{{ encore_entry_script_tags('jquery') }}#}
+
+            {#<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>#}
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+            <!-- Core plugin JavaScript-->
+            {#<script src="vendor/jquery-easing/jquery.easing.min.js"></script>#}
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+            <!-- Custom scripts for all pages-->
+            {#<script src="js/sb-admin-2.min.js"></script>#}
+            {{ encore_entry_script_tags('sb-admin-2.min.js') }}
+
+            <!-- Page level plugins -->
+            {#<script src="vendor/chart.js/Chart.min.js"></script>#}
+            <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+            <!-- Page level custom scripts -->
+            {#<script src="js/demo/chart-area-demo.js"></script>
+            <script src="js/demo/chart-pie-demo.js"></script>#}
+            {{ encore_entry_script_tags('chart-area-demo') }}
+            {{ encore_entry_script_tags('chart-pie-demo') }}
+
+
             {{ encore_entry_script_tags('app') }}
             <!-- Renders app.js & a webpack runtime.js file
                 <script src="/build/runtime.js"></script>

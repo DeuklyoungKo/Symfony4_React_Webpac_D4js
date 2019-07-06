@@ -24,9 +24,13 @@ Encore
  * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
  */
   .addEntry('app', './assets/js/app.js')
-  // .addEntry('main', './assets/js/main.js')
-// .addEntry('page1', './assets/js/page1.js')
-// .addEntry('page2', './assets/js/page2.js')
+  .addEntry('sb-admin-2.min.js', './assets/js/sb-admin-2.min.js')
+  .addEntry('chart-area-demo', './assets/js/demo/chart-area-demo.js')
+  .addEntry('chart-pie-demo', './assets/js/demo/chart-pie-demo.js')
+
+
+.addStyleEntry('sb-admin-2.min.css', './assets/css/sb-admin-2.min.css')
+.addStyleEntry('fontawesome', '@fortawesome/fontawesome-free/css/all.min.css')
 
 // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
   .splitEntryChunks()
@@ -65,7 +69,7 @@ Encore
 // .enableIntegrityHashes(Encore.isProduction())
 
 // uncomment if you're having problems with a jQuery plugin
-// .autoProvidejQuery()
+.autoProvidejQuery()
 
 // uncomment if you use API Platform Admin (composer req api-admin)
   .enableReactPreset()
@@ -79,9 +83,16 @@ Encore
     watchOptions.poll = 250; // check for changes every 250 milliseconds
   })
 
-/*  .copyFiles({
-    from: './assets/data/',
-  })*/
+.autoProvideVariables({
+  $: 'jquery',
+  jQuery: 'jquery',
+  'window.jQuery': 'jquery',
+})
+
+  .copyFiles({
+    from: './assets/img/',
+      to: 'img/[path][name].[hash:8].[ext]',
+  })
 
 
   .addLoader({
