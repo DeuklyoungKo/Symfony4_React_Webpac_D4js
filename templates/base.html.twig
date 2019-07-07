@@ -21,7 +21,7 @@
 
         <!-- Custom styles for this template-->
         {#<link href="css/sb-admin-2.min.css" rel="stylesheet">#}
-        {{ encore_entry_link_tags('sb-admin-2.min.css') }}
+        {{ encore_entry_link_tags('sb-admin-2.min-css') }}
 
         {# 'app' must match the first argument to addEntry() in webpack.config.js #}
         {{ encore_entry_link_tags('app') }}
@@ -66,12 +66,10 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     {#{{ encore_entry_script_tags('jquery') }}#}
 
-
-
-    {#<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>#}
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+{#    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
+            crossorigin="anonymous"></script>#}
 
     <!-- Core plugin JavaScript-->
     {#<script src="vendor/jquery-easing/jquery.easing.min.js"></script>#}
@@ -79,14 +77,14 @@
 
     <!-- Custom scripts for all pages-->
     {#<script src="js/sb-admin-2.min.js"></script>#}
-    {{ encore_entry_script_tags('sb-admin-2.min.js') }}
+    {{ encore_entry_script_tags('sb-admin-2.min-js') }}
 
     <!-- Page level plugins -->
     {#<script src="vendor/chart.js/Chart.min.js"></script>#}
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
     <!-- Page level custom scripts -->
-    {#<script src="js/demo/chart-area-demo.js"></script>
+{#    <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>#}
     {{ encore_entry_script_tags('chart-area-demo') }}
     {{ encore_entry_script_tags('chart-pie-demo') }}
