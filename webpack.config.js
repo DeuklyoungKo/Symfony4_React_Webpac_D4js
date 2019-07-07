@@ -27,8 +27,8 @@ Encore
     .addEntry('sb-admin-2.min-js', './assets/js/sb-admin-2.min.js')
     .addEntry('chart-area-demo', './assets/js/demo/chart-area-demo.js')
     .addEntry('chart-pie-demo', './assets/js/demo/chart-pie-demo.js')
-    // .addEntry('bootstrapBundle', 'bootstrap/dist/js/bootstrap.bundle.js')
-    .addEntry('bootstrapBundle', './assets/js/bootstrap.bundle.js')
+    .addEntry('bootstrapBundle', 'bootstrap/dist/js/bootstrap.bundle.js')
+    .addEntry('jquery.easing', 'jquery.easing/jquery.easing.min.js')
 
 
     .addStyleEntry('sb-admin-2.min-css', './assets/css/sb-admin-2.min.css')
