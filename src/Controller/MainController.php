@@ -9,11 +9,13 @@ class MainController extends AbstractController
 {
     /**
      * @Route("/main", name="main")
+     * @Route("/{pageCode}", name="Dashboard")
      */
-    public function main()
+    public function main(string $pageCode = 'Dashboard')
     {
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
+            'pageCode' => $pageCode
         ]);
     }
 }

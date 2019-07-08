@@ -3,6 +3,9 @@
 
   // Toggle the side navigation
   $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
+
+    console.log("test====");
+
     $("body").toggleClass("sidebar-toggled");
     $(".sidebar").toggleClass("toggled");
     if ($(".sidebar").hasClass("toggled")) {
@@ -12,6 +15,9 @@
 
   // Close any open menu accordions when window is resized below 768px
   $(window).resize(function() {
+
+    console.log("resize====");
+
     if ($(window).width() < 768) {
       $('.sidebar .collapse').collapse('hide');
     };
