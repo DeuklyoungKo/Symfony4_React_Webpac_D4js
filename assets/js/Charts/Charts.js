@@ -1,14 +1,30 @@
 import React, {Component} from 'react';
-import ChartAreaReact from '../demo/chart-area-react';
-import ChartPieReact from '../demo/chart-pie-react';
-import ChartBarReact from '../demo/chart-bar-react';
+import PropTypes from 'prop-types';
+
+import BarChart from './BarChart.js';
 
 export default class Charts extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            config : {
+                margin: {top: 20, right: 30, bottom: 30, left: 40},
+                width: 500,
+                height: 300,
+                startDate: 1975,
+                endDate: 1978,
+                durationSec: 3001,
+                // csvFileName: "../../data/data_basic1.csv"
+                csvFileName: "build/data/data_basic1.csv"
+            }
+        }
+
     }
 
+
     render() {
+
         return (
             <div className="container-fluid">
 
@@ -30,9 +46,12 @@ export default class Charts extends Component {
                                 <h6 className="m-0 font-weight-bold text-primary">Area Chart</h6>
                             </div>
                             <div className="card-body">
-                                <div className="chart-area">
+                                <div className="chart-area" id="chartContainer">
                                     {/*<canvas id="myAreaChart"></canvas>*/}
-                                    <ChartAreaReact/>
+                                    <BarChart
+                                        {...this.state}
+                                        {...this.props}
+                                    />
                                 </div>
                                 <hr/>
                                     Styling for the area chart can be found in
@@ -40,46 +59,16 @@ export default class Charts extends Component {
                             </div>
                         </div>
 
-                        {/*<!--Bar Chart -->*/}
-                        <div className="card shadow mb-4">
-                            <div className="card-header py-3">
-                                <h6 className="m-0 font-weight-bold text-primary">Bar Chart</h6>
-                            </div>
-                            <div className="card-body">
-                                <div className="chart-bar">
-                                    {/*<canvas id="myBarChart"></canvas>*/}
-                                    <ChartBarReact/>
-                                </div>
-                                <hr/>
-                                    Styling for the bar chart can be found in
-                                    the <code>/js/demo/chart-bar-demo.js</code> file.
-                            </div>
-                        </div>
-
                     </div>
 
-                    {/*<!--Donut Chart -->*/}
-                    <div className="col-xl-4 col-lg-5">
-                        <div className="card shadow mb-4">
-                            {/*<!--Card Header - Dropdown -->*/}
-                            <div className="card-header py-3">
-                                <h6 className="m-0 font-weight-bold text-primary">Donut Chart</h6>
-                            </div>
-                            {/*<!--Card Body -->*/}
-                            <div className="card-body" >
-                                <div className="chart-pie pt-4">
-                                    {/*<canvas id="myPieChart"></canvas>*/}
-                                    <ChartPieReact/>
-                                </div>
-                                <hr/>
-                                    Styling for the donut chart can be found in
-                                    the <code>/js/demo/chart-pie-demo.js</code> file.
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
 
             </div>
         )
     }
 }
+
+Charts.propTypes = {
+    fatchLink: PropTypes.string.isRequired
+};

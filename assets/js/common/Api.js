@@ -4,11 +4,27 @@ export function getFileNameOfData(fileLinkData, targetItemName) {
 
 export function getDataOfManifest(fatchLink){
 
-    fetch(fatchLink)
-        .then(response => response.json())
-        .then(data => {
-            return data;
-        })
+    return new Promise(function (resolve,reject) {
+
+        fetch(fatchLink)
+            .then(response => response.json())
+            .then(data => {
+                resolve( data);
+            })
+
+    })
+
+}
+
+
+export async function getCsvFileNameVersioned(fatchLink, csvFileName) {
+    try {
+        const fileLinkData = await getDataOfManifest(fatchLink)
+        const csvFileNameVersioned = getFileNameOfData(fileLinkData,csvFileName);
+        return csvFileNameVersioned
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 

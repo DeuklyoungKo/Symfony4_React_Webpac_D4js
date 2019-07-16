@@ -93,8 +93,12 @@ Encore
     .copyFiles({
         from: './assets/img/',
         to: 'img/[path][name].[hash:8].[ext]',
-    })
-
+        })
+    .copyFiles({
+            from: './assets/data/',
+            to: 'data/[path][name].[hash:8].[ext]',
+        }
+    )
 
     .addLoader({
         test: /\.csv$/,

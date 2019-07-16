@@ -10,7 +10,6 @@ import Charts from './Charts/Charts';
 import Tables from './Tables/Tables';
 
 
-
 export default class Main extends Component {
 
     constructor(props) {
@@ -79,7 +78,7 @@ export default class Main extends Component {
     sidebarToggle(){
 
         // $('.sidebar .collapse').collapse('hide');
-        $('#sidebarToggle').on('click',(e)=>{
+        $("#sidebarToggle, #sidebarToggleTop").on('click',(e)=>{
             e.preventDefault();
             $("body").toggleClass("sidebar-toggled");
             $(".sidebar").toggleClass("toggled");
@@ -135,5 +134,5 @@ export default class Main extends Component {
 
 
 Main.propTypes = {
-    pageCode: PropTypes.string
+    pageCode: PropTypes.string.isRequired
 };

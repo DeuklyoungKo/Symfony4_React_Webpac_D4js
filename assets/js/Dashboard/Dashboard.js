@@ -16,9 +16,13 @@ export default class Dashboard extends Component {
 
         const { fatchLink } = this.props;
 
-        this.setState({
-            fileLinkData: getDataOfManifest(fatchLink)
+        getDataOfManifest(fatchLink).then((data)=>{
+            this.setState({
+                fileLinkData: data
+            })
         })
+
+
 
     }
 

@@ -6,23 +6,9 @@ export default class Sidebar extends Component {
     constructor(props) {
         super(props);
 
-        this.setToggle = this.setToggle.bind(this);
-        this.nowPageShow = this.nowPageShow.bind(this);
     }
-
 
     componentDidMount() {
-        this.setToggle();
-    }
-
-
-    setToggle(){
-        const { sidebarToggle } = this.props;
-        sidebarToggle();
-    }
-
-    nowPageShow(){
-
     }
 
 
@@ -70,10 +56,10 @@ export default class Sidebar extends Component {
 
                 {/*<!-- Sidebar - Brand -->*/}
                 <a className="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                    <div className="sidebar-brand-icon rotate-n-15">
-                        <i className="fas fa-laugh-wink"></i>
+                    <div className="sidebar-brand-icon">
+                        <i className="far fa-chart-bar"></i>
                     </div>
-                    <div className="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                    <div className="sidebar-brand-text mx-3">Statistics{/*<sup>1</sup>*/}</div>
                 </a>
 
                 {/*<!-- Divider -->*/}
@@ -88,6 +74,23 @@ export default class Sidebar extends Component {
 
                 {/*<!-- Divider -->*/}
                 <hr className="sidebar-divider"/>
+
+                {/*<!-- Heading -->*/}
+                <div className="sidebar-heading">
+                    Charts
+                </div>
+
+
+                {/*<!-- Nav Item - Tables -->*/}
+                <li className={TablesLiclass}>
+                    <a className="nav-link" href="Charts">
+                        <i className="fas fa-fw fa-table"></i>
+                        <span>Charts</span></a>
+                </li>
+
+                {/*<!-- Divider -->*/}
+                <hr className="sidebar-divider d-none d-md-block"/>
+
 
                 {/*<!-- Heading -->*/}
                 <div className="sidebar-heading">
@@ -180,7 +183,11 @@ export default class Sidebar extends Component {
 
                 {/*<!-- Sidebar Toggler (Sidebar) -->*/}
                 <div className="text-center d-none d-md-inline">
-                    <button className="rounded-circle border-0" id="sidebarToggle"></button>
+                    <button
+                        className="rounded-circle border-0"
+                        id="sidebarToggle"
+                        onClick={this.handleClick}
+                    ></button>
                 </div>
 
             </ul>
