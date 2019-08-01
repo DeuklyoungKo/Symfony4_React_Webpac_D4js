@@ -25,6 +25,7 @@ export default class BarChart extends Component {
         this.svgHeight = null;
 
         this.makeChart = this.makeChart.bind(this);
+        this.reSetInit = this.reSetInit.bind(this);
 
     }
 
@@ -51,15 +52,24 @@ export default class BarChart extends Component {
             if (preDivWidth !== divWidth || preDivHeight !== divHeight) {
                 preDivWidth = divWidth;
 
-                d3.select('#chartContainer').select("svg").remove();
-
-                this.dataArray = [];
-                this.dataIndex = 0;
-                this.init();
+                this.reSetInit();
             }
 
         });
 
+    }
+
+
+    reSetInit(){
+        d3.select('#chartContainer').select("svg").remove();
+        this.dataIndex = 0;
+        this.init();
+    };
+
+    playButton(e){
+        event.preventDefault();
+        this.reSetInit();
+        this.makeChart(this.dataArray[this.dataIndex]);
     }
 
     init() {
@@ -75,7 +85,7 @@ export default class BarChart extends Component {
 
 
         let dataArray = this.dataArray;
-        let dataIndex = this.dataIndex;
+        // let dataIndex = this.dataIndex;
         let x = this.x;
         let y = this.y;
         let xAxis = this.xAxis;
@@ -147,7 +157,7 @@ export default class BarChart extends Component {
             .ease(d3.easeLinear);
 
         let dataArray = this.dataArray;
-        let dataIndex = this.dataIndex;
+        // let dataIndex = this.dataIndex;
         let x = this.x;
         let y = this.y;
         let yAxis = this.yAxis;
@@ -268,11 +278,11 @@ export default class BarChart extends Component {
             })
             .on("end", () => {
 
-                console.log("dataIndex==", dataIndex, this.dataArray.length)
-                if (dataIndex < this.dataArray.length - 1) {
+                console.log("this.dataIndex==", this.dataIndex, this.dataArray.length)
+                if (this.dataIndex < this.dataArray.length - 1) {
 
-                    this.dataIndex = ++dataIndex;
-                    this.makeChart(dataArray[dataIndex]);
+                    ++this.dataIndex;
+                    this.makeChart(dataArray[this.dataIndex]);
                 }
 
             })
@@ -286,7 +296,7 @@ export default class BarChart extends Component {
         return (
             <div>
                 <div className='play-button'>
-                    <a href="#" onClick={(e)=>{this.makeChart(this.dataArray[0])}} className="btn btn-primary btn-icon-split btn-sm">
+                    <a href="#" onClick={(e)=>{this.playButton(e)}} className="btn btn-primary btn-icon-split btn-sm">
                     <span className="icon text-white-50">
                       <i className="fas fa-play"></i>
                     </span>
