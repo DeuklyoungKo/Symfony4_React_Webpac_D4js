@@ -122,11 +122,12 @@ export default class BarChart extends Component {
                 value: +d.value,
             })
         ).then((data) => {
-
             for (let i = startDate; i <= endDate; i++) {
                 this.dataArray = [...this.dataArray, data.filter(data => +data.year === i)]
             }
-            this.makeChart(this.dataArray[dataIndex]);
+
+
+            // this.makeChart(this.dataArray[dataIndex]);
 
         })
 
@@ -282,14 +283,21 @@ export default class BarChart extends Component {
     }
 
 
-    chartResize(){
-
-    }
-
     render() {
 
         return (
-            <div className="chart"></div>
+            <div>
+                <div className='play-button'>
+                    <a href="#" onClick={(e)=>{this.makeChart(this.dataArray[0])}} className="btn btn-primary btn-icon-split btn-sm">
+                    <span className="icon text-white-50">
+                      <i className="fas fa-play"></i>
+                    </span>
+                        <span className="text">Play</span>
+                    </a>
+                </div>
+                <div className="chart"></div>
+            </div>
+
         )
 
     }

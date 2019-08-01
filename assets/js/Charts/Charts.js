@@ -9,7 +9,7 @@ export default class Charts extends Component {
 
         this.state = {
             config : {
-                margin: {top: 20, right: 30, bottom: 30, left: 40},
+                margin: {top: 20, right: 60, bottom: 60, left: 40},
                 width: 500,
                 height: 300,
                 startDate: 1975,
