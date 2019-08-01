@@ -11,11 +11,11 @@ export default class BarChart extends Component {
         super(props);
 
         this.state = {
-            dataIndex: 0,
             csvFileNameConvert: null
         };
 
         this.dataArray = [];
+        this.dataIndex = 0;
         this.x = null;
         this.y = null;
         this.xAxis = null;
@@ -53,6 +53,8 @@ export default class BarChart extends Component {
 
                 d3.select('#chartContainer').select("svg").remove();
 
+                this.dataArray = [];
+                this.dataIndex = 0;
                 this.init();
             }
 
@@ -62,7 +64,8 @@ export default class BarChart extends Component {
 
     init() {
 
-        const { dataIndex } = this.state;
+        console.log('==start init ==');
+
         // const {margin, width, height, startDate, endDate, csvFileName} = this.props.config;
         const {margin, startDate, endDate, csvFileName} = this.props.config;
         const {csvFileNameConvert} = this.state;
@@ -72,7 +75,7 @@ export default class BarChart extends Component {
 
 
         let dataArray = this.dataArray;
-        // let dataIndex = this.dataIndex;
+        let dataIndex = this.dataIndex;
         let x = this.x;
         let y = this.y;
         let xAxis = this.xAxis;
@@ -122,22 +125,21 @@ export default class BarChart extends Component {
                 value: +d.value,
             })
         ).then((data) => {
+
+            this.dataArray = [];
+
             for (let i = startDate; i <= endDate; i++) {
                 this.dataArray = [...this.dataArray, data.filter(data => +data.year === i)]
             }
 
-
-            // this.makeChart(this.dataArray[dataIndex]);
-
         })
 
+        console.log('==end init ==');
     }
 
 
     makeChart(data) {
 
-
-        let {dataIndex} = this.state;
         const {margin, durationSec} = this.props.config;
 
         const t = d3.transition()
@@ -145,7 +147,7 @@ export default class BarChart extends Component {
             .ease(d3.easeLinear);
 
         let dataArray = this.dataArray;
-        // let dataIndex = this.dataIndex;
+        let dataIndex = this.dataIndex;
         let x = this.x;
         let y = this.y;
         let yAxis = this.yAxis;
@@ -269,11 +271,7 @@ export default class BarChart extends Component {
                 console.log("dataIndex==", dataIndex, this.dataArray.length)
                 if (dataIndex < this.dataArray.length - 1) {
 
-                    dataIndex++;
-                    this.setState({
-                        dataIndex: dataIndex
-                    })
-
+                    this.dataIndex = ++dataIndex;
                     this.makeChart(dataArray[dataIndex]);
                 }
 
