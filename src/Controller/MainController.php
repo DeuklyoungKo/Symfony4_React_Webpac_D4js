@@ -9,7 +9,7 @@ class MainController extends AbstractController
 {
     /**
      * @Route("/main", name="main")
-     * @Route("/{pageCode}", name="Dashboard")
+     * @Route("/{pageCode}", name="pageCode")
      */
     public function main(string $pageCode = 'Dashboard')
     {

@@ -16,8 +16,14 @@ export default class Sidebar extends Component {
 
         const { nowPageCode } = this.props;
 
-        let barLiclass = "nav-item";
         let DashboardLiclass = "nav-item";
+        let ChartsLiclass = "nav-item";
+
+
+
+        let barLiclass = "nav-item";
+        let barLiclass2 = "nav-item";
+
         let PagesLiclass = "nav-item";
         let PagesSubClass = "collapse";
         let PagesSubClassCss = {
@@ -31,7 +37,14 @@ export default class Sidebar extends Component {
                 DashboardLiclass += " active";
                 break;
 
-            case "Error404":
+            case "Charts":
+                ChartsLiclass += " active";
+                break;
+
+
+
+
+             case "Error404":
                 PagesLiclass += " active";
                 PagesSubClass += " show";
                 PagesSubClassCss = {
@@ -39,8 +52,8 @@ export default class Sidebar extends Component {
                 };
                 break;
 
-            case "Charts":
-                barLiclass += " active";
+            case "Charts2":
+                barLiclass2 += " active";
                 break;
 
             case "Tables":
@@ -82,7 +95,7 @@ export default class Sidebar extends Component {
 
 
                 {/*<!-- Nav Item - Tables -->*/}
-                <li className={TablesLiclass}>
+                <li className={ChartsLiclass}>
                     <a className="nav-link" href="Charts">
                         <i className="fas fa-fw fa-table"></i>
                         <span>Charts</span></a>

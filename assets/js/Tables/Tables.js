@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import DataTable from 'datatables.net-bs4';
 import 'datatables.net-bs4/css/dataTables.bootstrap4.css';
-import '../sb-admin-2';
 
 export default class Tables extends Component {
     constructor(props) {

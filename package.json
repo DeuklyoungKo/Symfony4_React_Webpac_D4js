@@ -8,6 +8,7 @@
         "eslint-plugin-import": "^2.18.0",
         "eslint-plugin-jsx-a11y": "^6.2.3",
         "eslint-plugin-react": "^7.14.2",
+        "eslint-plugin-react-hooks": "^2.1.2",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
@@ -15,11 +16,12 @@
     "scripts": {
         "start": "encore dev-server --public http://reactjs.test.com:8080 --host 0.0.0.0  --disable-host-check",
         "dev": "encore dev",
-        "watch": "encore dev --watch",
+        "watch": "encore dev --watch",eslintConfig
         "build": "encore production --progress"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.9.0",
+        "axios": "^0.19.0",
         "bootstrap": "^4.3.1",
         "c3": "^0.7.1",
         "chart.js": "^2.8.0",
@@ -30,7 +32,9 @@
         "popper.js": "^1.15.0",
         "prop-types": "^15.7.2",
         "react": "^16.8.6",
+        "react-bootstrap": "^1.0.0-beta.13",
         "react-dom": "^16.8.6",
+        "react-table": "^6.10.0",
         "react-vis": "^1.11.7"
     }
 }

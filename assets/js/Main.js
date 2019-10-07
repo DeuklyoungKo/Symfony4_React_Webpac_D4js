@@ -7,7 +7,8 @@ import Footer from './common/Footer'
 import Error404 from './common/Error404';
 import Dashboard from './Dashboard/Dashboard';
 import Charts from './Charts/Charts';
-import Tables from './Tables/Tables';
+// import Tables from './Tables/Tables';
+// import Chart from './common/Constructing';
 
 
 export default class Main extends Component {
@@ -44,6 +45,11 @@ export default class Main extends Component {
 
         switch (nowPageCode) {
 
+            case "Charts":
+                nowPageObj = Charts
+                break;
+
+
             case "Dashboard":
                 nowPageObj = Dashboard
                 break;
@@ -52,13 +58,11 @@ export default class Main extends Component {
                 nowPageObj = Error404
                 break;
 
-            case "Charts":
-                nowPageObj = Charts
-                break;
 
             case "Tables":
                 nowPageObj = Tables
                 break;
+
 
             default:
                 nowPageObj = Dashboard
@@ -67,7 +71,8 @@ export default class Main extends Component {
         return React.createElement(
             nowPageObj,
             {
-                fatchLink: this.fatchLink
+                fatchLink: this.fatchLink,
+
             }
         )
 
