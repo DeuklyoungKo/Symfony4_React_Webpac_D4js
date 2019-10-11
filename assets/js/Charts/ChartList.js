@@ -2,17 +2,9 @@ import React, {Component, useState} from 'react';
 import PropTypes from 'prop-types';
 
 import Axios from 'axios';
-
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
-
-
-
-
 import ChartModal from './ChartModal';
-
-
-
 
 export default class ChartList extends Component {
     constructor(props) {
@@ -27,15 +19,11 @@ export default class ChartList extends Component {
 
     }
 
-
-
-
     componentDidMount() {
 
     }
 
     render() {
-
 
         const { data, pages, loading } = this.state;
 
@@ -60,7 +48,7 @@ export default class ChartList extends Component {
         }, {
             Header: 'view',
             accessor: 'id',
-            Cell: props =>  <ChartModal id={props.value}/>
+            Cell: props =>  <ChartModal data={props.original} />
         }]
 
 
@@ -76,8 +64,6 @@ export default class ChartList extends Component {
                     manual
                     defaultPageSize={5}
                     onFetchData={(state) => {
-
-                        console.log("state=",state);
 
                         // show the loading overlay
                         this.setState({loading: true})

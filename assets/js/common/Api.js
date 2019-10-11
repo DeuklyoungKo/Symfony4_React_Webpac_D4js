@@ -1,3 +1,4 @@
+
 export function getFileNameOfData(fileLinkData, targetItemName) {
     return fileLinkData ? fileLinkData[targetItemName] : '';
 }

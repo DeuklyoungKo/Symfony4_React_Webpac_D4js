@@ -16,7 +16,7 @@
     "scripts": {
         "start": "encore dev-server --public http://reactjs.test.com:8080 --host 0.0.0.0  --disable-host-check",
         "dev": "encore dev",
-        "watch": "encore dev --watch",eslintConfig
+        "watch": "encore dev --watch",
         "build": "encore production --progress"
     },
     "dependencies": {

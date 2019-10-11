@@ -48,6 +48,25 @@ class ChartRepository extends ServiceEntityRepository
     }
 
 
+    public function chart(int $id)
+    {
+
+
+        return $this->createQueryBuilder('c')
+                    ->select('c.id')
+                    ->addSelect('c.title')
+                    ->addSelect('c.startYear')
+                    ->addSelect('c.endYear')
+                    ->addSelect('DATE_FORMAT(c.createdAt, \'%Y-%m-%d\') as createdAt')
+                    ->addSelect('c.dataFile')
+                    ->where('c.id = :id')
+                    ->setParameter('id', $id)
+                    ->getQuery()
+                    ->getResult()
+            ;
+    }
+
+
     /*
     public function findOneBySomeField($value): ?Chart
     {

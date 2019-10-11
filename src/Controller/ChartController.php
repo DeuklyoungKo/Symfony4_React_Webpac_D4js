@@ -72,7 +72,7 @@ class ChartController extends AbstractController
 
         $chart = $this->getDoctrine()
                       ->getRepository(Chart::class)
-                      ->find($id);
+                      ->chart($id);
 
         if (!$chart) {
             throw $this->createNotFoundException(
@@ -85,7 +85,7 @@ class ChartController extends AbstractController
 
 //        dd($arrayData);
 
-        $response = new JsonResponse(['data' => $jsonContent]);
+        $response = new JsonResponse(['result' => $jsonContent]);
 
         return $response;
     }

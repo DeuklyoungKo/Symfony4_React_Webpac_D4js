@@ -31,15 +31,13 @@ export default class BarChart extends Component {
 
     componentDidMount() {
 
-        const { fatchLink } = this.props;
-        const {csvFileName} = this.props.config;
-        const result = getCsvFileNameVersioned(fatchLink, csvFileName);
-        result.then((data)=>{
-            this.setState({
-                csvFileNameConvert:data
-            });
-            this.init();
+        console.log(this.props.config.csvFileName);
+
+        this.setState({
+            csvFileNameConvert:this.props.config.csvFileName
         });
+        this.init();
+
 
 
         let preDivWidth = document.getElementById('chartContainer').clientWidth;
@@ -313,6 +311,6 @@ export default class BarChart extends Component {
 
 
 BarChart.propTypes = {
-    fatchLink: PropTypes.string.isRequired,
+    // fatchLink: PropTypes.string.isRequired,
     config: PropTypes.object.isRequired
 };

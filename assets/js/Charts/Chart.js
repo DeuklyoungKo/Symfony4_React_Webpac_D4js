@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
 import BarChart from './BarChart.js';
 
 export default class Charts extends Component {
@@ -16,7 +15,7 @@ export default class Charts extends Component {
                 endDate: 1978,
                 durationSec: 3001,
                 // csvFileName: "../../data/data_basic1.csv"
-                csvFileName: "build/data/data_basic1.csv"
+                csvFileName: "/upload/data/data_basic1.csv"
             }
         }
 
@@ -70,5 +69,5 @@ export default class Charts extends Component {
 }
 
 Charts.propTypes = {
-    fatchLink: PropTypes.string.isRequired
+    // fatchLink: PropTypes.string.isRequired
 };
