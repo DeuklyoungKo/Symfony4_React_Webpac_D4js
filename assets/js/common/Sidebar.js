@@ -6,11 +6,28 @@ export default class Sidebar extends Component {
     constructor(props) {
         super(props);
 
+        console.log(props);
+
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
+        // $('.sidebar .collapse').collapse('hide');
+        $("#sidebarToggle, #sidebarToggleTop").on('click',(e)=>{
+            e.preventDefault();
+            $("body").toggleClass("sidebar-toggled");
+            $(".sidebar").toggleClass("toggled");
+            if ($(".sidebar").hasClass("toggled")) {
+                $('.sidebar .collapse').collapse('hide');
+            };
+        })
     }
 
+    handleClick(){
+
+        const {sidebarToggle} = this.props;
+        sidebarToggle();
+    }
 
     render() {
 
@@ -18,8 +35,6 @@ export default class Sidebar extends Component {
 
         let DashboardLiclass = "nav-item";
         let ChartsLiclass = "nav-item";
-
-
 
         let barLiclass = "nav-item";
         let barLiclass2 = "nav-item";
@@ -40,9 +55,6 @@ export default class Sidebar extends Component {
             case "Charts":
                 ChartsLiclass += " active";
                 break;
-
-
-
 
              case "Error404":
                 PagesLiclass += " active";
@@ -199,7 +211,7 @@ export default class Sidebar extends Component {
                     <button
                         className="rounded-circle border-0"
                         id="sidebarToggle"
-                        onClick={this.handleClick}
+                        // onClick={this.handleClick}
                     ></button>
                 </div>
 

@@ -35,7 +35,6 @@ export default class Main extends Component {
         }
 
         this.getContentTag = this.getContentTag.bind(this);
-        this.sidebarToggle = this.sidebarToggle.bind(this);
     }
 
 
@@ -80,20 +79,6 @@ export default class Main extends Component {
 
 
 
-    sidebarToggle(){
-
-        // $('.sidebar .collapse').collapse('hide');
-        $("#sidebarToggle, #sidebarToggleTop").on('click',(e)=>{
-            e.preventDefault();
-            $("body").toggleClass("sidebar-toggled");
-            $(".sidebar").toggleClass("toggled");
-            if ($(".sidebar").hasClass("toggled")) {
-                $('.sidebar .collapse').collapse('hide');
-            };
-        })
-    }
-
-
     render() {
 
         const {nowPageObj, nowPageCode} = this.state;
@@ -106,7 +91,6 @@ export default class Main extends Component {
             <div id="wrapper">
                 <Sidebar
                     nowPageCode={nowPageCode}
-                    sidebarToggle={sidebarToggle}
                 />
 
                 {/*<!--Content Wrapper -->*/}
