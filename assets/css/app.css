@@ -4,8 +4,9 @@ body {
 
 /*for modal window of bootstrap*/
 .modal-90w {
-    width: 90%;
+    width: 95%;
     max-width: none!important;
+    height: 1500px;
 }
 
 /*for modal window of bootstrap*/

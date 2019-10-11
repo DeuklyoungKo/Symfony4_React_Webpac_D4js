@@ -14,7 +14,7 @@ export default class ChartList extends Component {
             data: [],
             page: 0,
             pages: null,
-            loading: true
+            loading: true,
         };
 
     }
@@ -63,6 +63,7 @@ export default class ChartList extends Component {
                     loading={this.state.loading}
                     manual
                     defaultPageSize={5}
+                    sortable={false}
                     onFetchData={(state) => {
 
                         // show the loading overlay

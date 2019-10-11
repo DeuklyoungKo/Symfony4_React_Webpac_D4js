@@ -24,4 +24,8 @@
     padding: 2px;
 }
 
+/*d3 chart size*/
+.chart-area.d3-chart-area{
+    height: 25rem;
+}
 

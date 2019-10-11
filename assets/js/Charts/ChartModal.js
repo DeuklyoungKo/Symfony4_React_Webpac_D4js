@@ -8,18 +8,15 @@ import Chart from './Chart';
 import Axios from "axios";
 
 
-export default function ChartModal(prop) {
+export default function ChartModal(props) {
 
     const [lgShow, setLgShow] = useState(false);
     const [data, setData] = useState({result:[{title:'defaultTitle'}]});
 
-    const {id} = prop.data;
+    const {id} = props.data;
 
 
     useEffect(()=>{
-
-
-
 
         const fetchData =  async () => {
             const result = await Axios.get(
@@ -60,7 +57,5 @@ export default function ChartModal(prop) {
 }
 
 ChartModal.propTypes = {
-    data: PropTypes.shape({
-        id: PropTypes.number
-    })
+    data: PropTypes.object.isRequired
 };

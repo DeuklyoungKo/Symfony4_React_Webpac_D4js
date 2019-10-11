@@ -1,129 +1,38 @@
-import React, {Component} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 
 import * as d3 from "d3";
 import '../../css/barChart.css';
-import { getCsvFileNameVersioned } from '../common/Api';
 
 
-export default class BarChart extends Component {
-    constructor(props) {
-        super(props);
+export default function BarChart(props){
 
-        this.state = {
-            csvFileNameConvert: null
-        };
+    console.log("==props==");
+    console.log(props);
 
-        this.dataArray = [];
-        this.dataIndex = 0;
-        this.x = null;
-        this.y = null;
-        this.xAxis = null;
-        this.yAxis = null;
-        this.chart = null;
-        this.svgWidth = null;
-        this.svgHeight = null;
+    const {margin, startDate, endDate, csvFileName} = props.config;
+    const getChartContainerSize = props.getChartContainerSize;
 
-        this.makeChart = this.makeChart.bind(this);
-        this.reSetInit = this.reSetInit.bind(this);
+    const csvFileNameConvert = csvFileName;
 
-    }
+    const [dataArray, setDataArray] = useState([]);
 
-    componentDidMount() {
-
-        console.log(this.props.config.csvFileName);
-
-        this.setState({
-            csvFileNameConvert:this.props.config.csvFileName
-        });
-        this.init();
+    // let dataArray = [];
+    let dataIndex = 0;
+    let x = null;
+    let y = null;
+    let xAxis = null;
+    let yAxis = null;
+    let chart = null;
+    let svgWidth = null;
+    let svgHeight = null;
 
 
+    useEffect(()=> {
 
-        let preDivWidth = document.getElementById('chartContainer').clientWidth;
-        let preDivHeight = document.getElementById('chartContainer').clientHeight;
-
-        window.addEventListener('resize',(data)=>{
-            let divWidth = document.getElementById('chartContainer').clientWidth;
-            let divHeight = document.getElementById('chartContainer').clientHeight
-
-            if (preDivWidth !== divWidth || preDivHeight !== divHeight) {
-                preDivWidth = divWidth;
-
-                this.reSetInit();
-            }
-
-        });
-
-    }
-
-
-    reSetInit(){
-        d3.select('#chartContainer').select("svg").remove();
-        this.dataIndex = 0;
-        this.init();
-    };
-
-    playButton(e){
-        event.preventDefault();
-        this.reSetInit();
-        this.makeChart(this.dataArray[this.dataIndex]);
-    }
-
-    init() {
-
-        console.log('==start init ==');
-
-        // const {margin, width, height, startDate, endDate, csvFileName} = this.props.config;
-        const {margin, startDate, endDate, csvFileName} = this.props.config;
-        const {csvFileNameConvert} = this.state;
-
-        const width =  document.getElementById('chartContainer').clientWidth
-        const height = document.getElementById('chartContainer').clientHeight
-
-
-        let dataArray = this.dataArray;
-        // let dataIndex = this.dataIndex;
-        let x = this.x;
-        let y = this.y;
-        let xAxis = this.xAxis;
-        let yAxis = this.yAxis;
-        let chart = this.chart;
-
-
-        this.svgWidth = width - margin.left - margin.right;
-        this.svgHeight = height - margin.top - margin.bottom;
-
-        this.x = d3.scaleLinear()
-            .rangeRound([0, this.svgWidth]);
-
-        this.y = d3.scaleBand()
-            .rangeRound([0, this.svgHeight])
-            .padding(0.1);
-
-        this.xAxis = d3.axisBottom(this.x);
-        this.yAxis = d3.axisLeft(this.y);
-
-
-        this.chart = d3.select(".chart").append("svg")
-            .attr("width", this.svgWidth + margin.left + margin.right + 60)
-            .attr("height", this.svgHeight + margin.top + margin.bottom + 30)
-            .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-        this.chart.append("g")
-            .attr("class", "x axis xaxis")
-            .attr("transform", "translate(0," + this.svgHeight + ")");
-
-        this.chart.append("g")
-            .attr("class", "y axis yaxis")
-            .attr('fill', "#000099");
-
-        this.chart.append("text")
-            .attr("class", "timeTitle")
-            .attr("x", this.svgWidth / 2 + 50)
-            .attr("y", this.svgHeight + margin.top + 10)
-            .attr("text-anchor", "end");
+        let ChartContainerSize = getChartContainerSize();
+        let preDivWidth = ChartContainerSize.containerWidth;
+        let preDivHeight = ChartContainerSize.containerHeight;
 
 
         d3.dsv(",", csvFileNameConvert, (d, i) => ({
@@ -134,33 +43,126 @@ export default class BarChart extends Component {
             })
         ).then((data) => {
 
-            this.dataArray = [];
+            let dataArraySub = [];
 
             for (let i = startDate; i <= endDate; i++) {
-                this.dataArray = [...this.dataArray, data.filter(data => +data.year === i)]
+                dataArraySub = [...dataArraySub, data.filter(data => +data.year === i)]
             }
 
-        })
+            setDataArray(dataArraySub);
+
+            console.log('==data is ready  ==');
+            console.log(dataArraySub[dataIndex]);
+
+            // init();
+
+        });
+
+
+        window.addEventListener('resize',(data)=>{
+
+            // to check changed size
+            let ChartContainerSize = getChartContainerSize();
+            let divWidth = ChartContainerSize.containerWidth;
+            let divHeight = ChartContainerSize.containerHeight;
+
+
+            if (preDivWidth !== divWidth || preDivHeight !== divHeight) {
+                preDivWidth = divWidth;
+
+                reSetInit();
+            }
+
+        });
+
+    },[]);
+
+
+    function reSetInit(){
+        console.log('==reSetInit==');
+        d3.select('#chartContainer').select("svg").remove();
+        dataIndex = 0;
+        init();
+    };
+
+    function onPlayButton(e){
+        event.preventDefault();
+        reSetInit();
+
+
+        console.log('==dataArray ==');
+        console.log(dataArray);
+
+
+        makeChart(dataArray[dataIndex]);
+    }
+
+    function init() {
+
+        console.log('==start init ==');
+
+        let ChartContainerSize = getChartContainerSize();
+        let width = ChartContainerSize.containerWidth;
+        let height = ChartContainerSize.containerHeight;
+
+        console.log('==width height ==');
+        console.log(width,height);
+
+        svgWidth = width - margin.left - margin.right;
+        svgHeight = height - margin.top - margin.bottom;
+
+        x = d3.scaleLinear()
+            .rangeRound([0, svgWidth]);
+
+        y = d3.scaleBand()
+            .rangeRound([0, svgHeight])
+            .padding(0.1);
+
+        xAxis = d3.axisBottom(x);
+        yAxis = d3.axisLeft(y);
+
+
+        chart = d3.select(".chart").append("svg")
+            .attr("width", svgWidth + margin.left + margin.right + 60)
+            .attr("height", svgHeight + margin.top + margin.bottom + 30)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        chart.append("g")
+            .attr("class", "x axis xaxis")
+            .attr("transform", "translate(0," + svgHeight + ")");
+
+        chart.append("g")
+            .attr("class", "y axis yaxis")
+            .attr('fill', "#000099");
+
+        chart.append("text")
+            .attr("class", "timeTitle")
+            .attr("x", svgWidth / 2 + 50)
+            .attr("y", svgHeight + margin.top + 20)
+            .attr("text-anchor", "end");
+
+
+        console.log('==dataArray,dataArray[dataIndex],dataIndex==');
+        console.log(dataArray,dataArray[dataIndex],dataIndex);
+
+        makeChart(dataArray[dataIndex]);
 
         console.log('==end init ==');
     }
 
 
-    makeChart(data) {
+    function makeChart(data) {
 
-        const {margin, durationSec} = this.props.config;
+        console.log('==data ==');
+        console.log(data);
+
+
+        const {margin, durationSec} = props.config;
 
         const t = d3.transition()
             .duration(durationSec)
             .ease(d3.easeLinear);
-
-        let dataArray = this.dataArray;
-        // let dataIndex = this.dataIndex;
-        let x = this.x;
-        let y = this.y;
-        let yAxis = this.yAxis;
-        let chart = this.chart;
-        let svgHeight = this.svgHeight;
 
 
         data.sort((a, b) => {
@@ -173,12 +175,12 @@ export default class BarChart extends Component {
             return d.name
         }));
 
-        this.chart.select(".xaxis")
+        chart.select(".xaxis")
             .transition(t)
-            .call(this.xAxis)
+            .call(xAxis)
 
 
-        this.chart.select(".yaxis")
+        chart.select(".yaxis")
             .transition(t)
             .call(yAxis)
 
@@ -276,11 +278,10 @@ export default class BarChart extends Component {
             })
             .on("end", () => {
 
-                console.log("this.dataIndex==", this.dataIndex, this.dataArray.length)
-                if (this.dataIndex < this.dataArray.length - 1) {
-
-                    ++this.dataIndex;
-                    this.makeChart(dataArray[this.dataIndex]);
+                console.log("this.dataIndex==", dataIndex, dataArray.length)
+                if (dataIndex < dataArray.length - 1) {
+                    ++dataIndex;
+                    makeChart(dataArray[dataIndex]);
                 }
 
             })
@@ -289,28 +290,28 @@ export default class BarChart extends Component {
     }
 
 
-    render() {
+    console.log("== Barchart 2 ==");
 
-        return (
-            <div>
-                <div className='play-button'>
-                    <a href="#" onClick={(e)=>{this.playButton(e)}} className="btn btn-primary btn-icon-split btn-sm">
-                    <span className="icon text-white-50">
-                      <i className="fas fa-play"></i>
-                    </span>
-                        <span className="text">Play</span>
-                    </a>
-                </div>
-                <div className="chart"></div>
+    return (
+        <div id={"graphRootDiv"}>
+            <div className='play-button'>
+                <a href="#" onClick={(e)=>{onPlayButton(e)}} className="btn btn-primary btn-icon-split btn-sm">
+                <span className="icon text-white-50">
+                  <i className="fas fa-play"></i>
+                </span>
+                    <span className="text">Play</span>
+                </a>
             </div>
+            <div className="chart"></div>
+        </div>
 
-        )
+    )
 
-    }
 }
 
 
 BarChart.propTypes = {
-    // fatchLink: PropTypes.string.isRequired,
-    config: PropTypes.object.isRequired
+    config: PropTypes.object.isRequired,
+    getChartContainerSize: PropTypes.func.isRequired
+
 };
