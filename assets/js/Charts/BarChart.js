@@ -48,9 +48,7 @@ export default function BarChart(props){
             for (let i = startDate; i <= endDate; i++) {
                 dataArraySub = [...dataArraySub, data.filter(data => +data.year === i)]
             }
-
             setDataArray(dataArraySub);
-
             console.log('==data is ready  ==');
             console.log(dataArraySub[dataIndex]);
 
@@ -88,12 +86,6 @@ export default function BarChart(props){
     function onPlayButton(e){
         event.preventDefault();
         reSetInit();
-
-
-        console.log('==dataArray ==');
-        console.log(dataArray);
-
-
         makeChart(dataArray[dataIndex]);
     }
 
@@ -118,7 +110,9 @@ export default function BarChart(props){
             .rangeRound([0, svgHeight])
             .padding(0.1);
 
-        xAxis = d3.axisBottom(x);
+        xAxis = d3.axisBottom(x)
+            .tickSizeInner(-svgHeight)
+        ;
         yAxis = d3.axisLeft(y);
 
 
@@ -162,7 +156,7 @@ export default function BarChart(props){
 
         const t = d3.transition()
             .duration(durationSec)
-            .ease(d3.easeLinear);
+            .ease(d3.easeExpOut);
 
 
         data.sort((a, b) => {
@@ -271,8 +265,8 @@ export default function BarChart(props){
                 return function (t) {
                     let dateValue = new Date(i(t));
                     d3.select(this).text(
-                        dateValue.toLocaleString('en-us', {month: 'long'})
-                        + "." + dateValue.getFullYear()
+                        // dateValue.toLocaleString('en-us', {month: 'long'}) + "." +
+                        dateValue.getFullYear()
                     );
                 };
             })

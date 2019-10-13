@@ -29,3 +29,28 @@
     height: 25rem;
 }
 
+
+/*
+ * use crispEdges for a sharper looking axis
+ * since these are vertical/horizontal lines
+ */
+.axis line{
+  fill: none;
+  stroke: #cccccc;
+  shape-rendering: crispEdges;
+}
+
+
+.axis path{
+    fill: none;
+    stroke: #000000;
+    shape-rendering: crispEdges;
+}
+
+
+/*
+ * align text with a tick
+ */
+.tick text{
+    /*text-anchor: end; !* or start or end *!*/
+}
