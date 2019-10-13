@@ -33,3 +33,5 @@ yarn-error.log
 ### test file ###
 /public/t.html
 /public/s.html
+
+/public/upload/*.*
