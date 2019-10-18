@@ -1,8 +1,17 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import BarChart from './BarChart.js';
+import BarChartTime from './BarChartTime.js';
+import Axios from "axios";
+import Charts from "./Charts";
+import Dashboard from "../Dashboard/Dashboard";
+import Error404 from "../common/Error404";
 
 export default function Chart(props){
+
+
+    const [data, setData] = useState({type:{}});
+
 
     const config = {
         margin: {top: 20, right: 60, bottom: 60, left: 40},
@@ -14,6 +23,9 @@ export default function Chart(props){
         // csvFileName: "../../data/data_basic1.csv"
         csvFileName: "/upload/data/data_basic1.csv"
     }
+
+    const {id} = props;
+
 
     const chartContainer = useRef(null);
 
@@ -27,6 +39,79 @@ export default function Chart(props){
             containerHeight:containerHeight
         }
     };
+
+
+    function getChartComponent(inData) {
+
+
+        let nowPageObj, inChartType;
+
+        console.log("==inChartType1==");
+        console.log(inData);
+        if(inData.id) {
+            console.log("==inChartType2==");
+            inChartType = inData.type;
+        }else{
+            console.log("==inChartType3==");
+            return;
+        }
+        console.log("==inChartType4==");
+
+        switch (inChartType) {
+
+            case "BarChart":
+                nowPageObj = BarChart;
+                break;
+
+            case "BarChartTime":
+                nowPageObj = BarChartTime;
+                break;
+
+        }
+
+
+        console.log("==inChartType==");
+        console.log(inChartType);
+
+        return React.createElement(
+            nowPageObj,
+            {
+                    config:config,
+                    ...props,
+                    getChartContainerSize: getChartContainerSize
+                }
+        )
+
+    }
+
+
+
+
+    useEffect(()=>{
+
+        let isSubscribed = true;
+
+        Axios.get('http://reactjs.test.com/chart/data/'+id)
+            .then((res) => {
+
+                let resData = res.data.result[0];
+
+                console.log("==res==");
+
+                if (isSubscribed) {
+                    setData(resData);
+                }
+
+            })
+
+
+        return () => isSubscribed = false
+    },[]);
+
+
+
+
+
 
 
     return (
@@ -46,12 +131,12 @@ export default function Chart(props){
                         </div>*/}
                         <div className="card-body">
                             <div className="chart-area d3-chart-area" ref={chartContainer} id={"chartContainer"}>
-                                {/*<canvas id="myAreaChart"></canvas>*/}
-                                <BarChart
+                                {getChartComponent(data)}
+{/*                                <BarChart
                                     config={config}
                                     {...props}
                                     getChartContainerSize={getChartContainerSize}
-                                />
+                                />*/}
                             </div>
                         </div>
                     </div>

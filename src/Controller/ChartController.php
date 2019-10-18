@@ -22,8 +22,16 @@ class ChartController extends AbstractController
     {
 
         $content = json_decode($request->getContent());
-        $pageSize = $content->pageSize;
-        $page = $content->page ?:1;
+
+        if ($content==""){
+            $pageSize = 5;
+            $page = 1;
+        }else{
+            $pageSize = $content->pageSize;
+            $page = $content->page ?:1;
+        }
+
+
 
 
         $firstResult = ($page-1)*$pageSize;
@@ -103,6 +111,7 @@ class ChartController extends AbstractController
 //        $chart->setTitle(null);
         $chart->setStartYear(1975);
         $chart->setEndYear(1978);
+        $chart->setType('BarChartTime');
         $chart->setDataFile("/upload/data/data_basic1.csv");
 
         $errors = $validator->validate($chart);

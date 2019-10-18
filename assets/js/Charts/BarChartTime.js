@@ -5,9 +5,9 @@ import * as d3 from "d3";
 import '../../css/barChart.css';
 
 
-export default function BarChart(props){
+export default function BarChartTime(props){
 
-    console.log("BarChart==props==");
+    console.log("BarChartTime==props==");
     console.log(props);
 
     const {margin, startDate, endDate, csvFileName} = props.config;
@@ -304,7 +304,7 @@ export default function BarChart(props){
 }
 
 
-BarChart.propTypes = {
+BarChartTime.propTypes = {
     config: PropTypes.object.isRequired,
     getChartContainerSize: PropTypes.func.isRequired
 
