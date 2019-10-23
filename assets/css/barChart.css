@@ -54,3 +54,14 @@
 .tick text{
     /*text-anchor: end; !* or start or end *!*/
 }
+
+
+
+/*----------------------------------------------
+*/
+
+.barchart1{
+    fill: #3c763d;
+    stroke: #d6e9c6;
+    stroke-width: 5;
+}
